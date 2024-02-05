@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import axiosClient from "@/shared/axiosClient";
+import Toast from "./Toast";
 
 const navigation = [
   { name: "Dashboard", to: "/" },
@@ -16,6 +17,15 @@ function classNames(...classes) {
 export default function DefaultLayout() {
   const { currentUser, userToken, setCurrentUser, handleSetUserToken } =
     useStateContext();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      await axiosClient.get("/get-user").then(({ data }) => {
+        setCurrentUser(data);
+      });
+    };
+    fetchUser();
+  }, [setCurrentUser]);
 
   if (!userToken) {
     return <Navigate to="/login" />;
@@ -174,6 +184,7 @@ export default function DefaultLayout() {
         </Disclosure>
 
         <Outlet />
+        <Toast />
       </div>
     </>
   );

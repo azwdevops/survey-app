@@ -18,8 +18,8 @@ const SurveyListItem = ({ survey, onDeleteClick }) => {
         dangerouslySetInnerHTML={{ __html: survey.description }}
         className="overflow-hidden flex-1"
       ></div>
-      <TButton to={`surveys/${survey.id}`}>
-        <PencilIcon className="w-5 h-5 mr-2" />
+      <TButton to={`/surveys/${survey.id}`}>
+        <PencilIcon className="w-5 h-5 mr-2" /> Edit
       </TButton>
       <div className="flex items-center">
         <TButton href={`/view/survey/${survey.slug}`} circle link>

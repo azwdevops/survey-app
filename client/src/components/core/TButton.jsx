@@ -11,6 +11,7 @@ const TButton = ({
 }) => {
   let classes = [
     "flex",
+    "items-center",
     "whitespace-nowrap",
     "text-sm",
     "border",
